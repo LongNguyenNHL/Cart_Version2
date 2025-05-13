@@ -1,3 +1,2 @@
-id,password
-aaa,123
-bbb,234
+a,a
+b,b

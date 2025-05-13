@@ -1,7 +1,5 @@
 package com.longg.dto;
 
-import java.text.DecimalFormat;
-
 public class Product {
 	public String name;
 	public double price;

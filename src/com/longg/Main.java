@@ -20,7 +20,9 @@ public class Main {
 	private static AuthenService authenService = new AuthenService();
 
 	public static void main(String[] args) {
-
+		
+		choiceStore();
+		
 		boolean isLoggedin;
 
 		do {
@@ -77,5 +79,17 @@ public class Main {
 
 		System.out.println("Added succesfully.");
 	}
-
+	
+	
+	private static void choiceStore() {
+		System.out.println("---------Select Store---------");
+		System.out.println("1. Store A");
+		System.out.println("2. Store B");
+		System.out.println("Enter your selection: ");
+		int storeName = scan.nextInt();
+		scan.nextLine();
+		
+		Database.readCustomerFile(storeName);
+		Database.readProductFile(storeName);
+	}
 }
