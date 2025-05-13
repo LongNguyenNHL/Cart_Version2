@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		choiceStore();
+		selectStore();
 		
 		boolean isLoggedin;
 
@@ -80,8 +80,7 @@ public class Main {
 		System.out.println("Added succesfully.");
 	}
 	
-	
-	private static void choiceStore() {
+	private static void selectStore() {
 		System.out.println("---------Select Store---------");
 		System.out.println("1. Store A");
 		System.out.println("2. Store B");
