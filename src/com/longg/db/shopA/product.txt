@@ -1,2 +1,2 @@
-Coffee,5
-Milk,3
+Coffee,6
+Milk,4
