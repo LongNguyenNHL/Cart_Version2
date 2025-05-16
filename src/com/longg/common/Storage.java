@@ -1,9 +1,14 @@
 package com.longg.common;
 
+import com.longg.dto.Customer;
 import com.longg.dto.Shop;
 
 public class Storage {
 	public static Shop currentShop = null;
+	
+	public static Customer currentCustomer = null;
+	
+	public static int currentLogId = 0;
 	
 	public static final String FILE_PATH = "src/com/longg/db/"; 
 }

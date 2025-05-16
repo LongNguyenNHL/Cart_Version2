@@ -1,3 +1,4 @@
 id,name,path
 1,shop Night Time,shopA
 2,shop The Flower,shopB
+3,shop Toy,shopC

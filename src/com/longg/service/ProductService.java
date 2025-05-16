@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.longg.common.Storage;
-import com.longg.dto.Customer;
 import com.longg.dto.Product;
-import com.longg.dto.Shop;
-
-import environment.Environment;
 
 public class ProductService {
 	

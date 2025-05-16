@@ -1,0 +1,3 @@
+Car,5
+Robot,10
+Lego,20

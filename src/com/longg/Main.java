@@ -6,9 +6,13 @@ import java.util.Scanner;
 import com.longg.common.Storage;
 import com.longg.dto.Cart;
 import com.longg.dto.CartItem;
+import com.longg.dto.Customer;
+import com.longg.dto.Log;
 import com.longg.dto.Product;
 import com.longg.dto.Shop;
 import com.longg.service.AuthenService;
+import com.longg.service.EmailService;
+import com.longg.service.LogService;
 import com.longg.service.ProductService;
 import com.longg.service.ShopService;
 import com.longg.service.ShoppingCartService;
@@ -17,6 +21,7 @@ public class Main {
 
 	static Cart cart;
 	static Shop selectedShop;
+	static Customer customer;
 	static Scanner scan = new Scanner(System.in);
 	private static final int VIEW_CART_OPTION_ON_MENU = 0;
 
@@ -34,6 +39,8 @@ public class Main {
 			isLoggedin = doLogin();
 		} while (!isLoggedin);
 
+		
+		
 		do {
 			showMenu();
 
@@ -46,7 +53,6 @@ public class Main {
 			} else {
 				doAddProductToCart(option);
 			}
-
 		} while (true);
 	}
 
@@ -61,7 +67,7 @@ public class Main {
 	}
 
 	private static boolean doLogin() {
-
+	
 		System.out.print("Enter ID: ");
 		String userID = scan.nextLine();
 
@@ -69,10 +75,14 @@ public class Main {
 		System.out.print("Enter Password: ");
 		String userPassword = scan.nextLine();
 
-		boolean isLoggedin = authenService.login(selectedShop, userID, userPassword);
-		if (isLoggedin) {
+		boolean isLoggedin = false;
+		customer = authenService.login(userID, userPassword);
+		if (customer != null) {
 			cart = new Cart();
 			cart.items = new ArrayList<CartItem>();
+			Storage.currentCustomer = customer;
+			authenService.doWhenLoginSuccessful();
+			isLoggedin = true;
 		}
 		return isLoggedin;
 	}

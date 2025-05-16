@@ -21,7 +21,7 @@ public class CustomerService {
 				String line = reader.nextLine(); // Doc 1 dong trong file
 				String[] parts = line.split(","); 
 				
-				customers.add(new Customer(parts[0],parts[1]));
+				customers.add(new Customer(parts[0],parts[1],parts[2]));
 				 
 			}
 			reader.close();

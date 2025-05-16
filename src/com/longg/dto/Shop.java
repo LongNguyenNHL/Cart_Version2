@@ -1,7 +1,7 @@
 package com.longg.dto;
 
 public class Shop {
-	private int id;
+	public int id;
 	public String name;
 	public String shopPath;
 	
