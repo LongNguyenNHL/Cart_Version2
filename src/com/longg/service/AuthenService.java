@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import com.longg.common.Storage;
 import com.longg.dto.Customer;
-import com.longg.dto.Log;
+import com.longg.service.Shop1Service.Shop1AuthenService;
+import com.longg.service.Shop2Service.Shop2AuthenService;
+import com.longg.service.Shop3Service.Shop3AuthenService;
 
 // service class -> contain functions 
-public class AuthenService {
+public abstract class AuthenService {
 	
 	CustomerService customerService = new CustomerService();
 	// login
@@ -21,27 +23,18 @@ public class AuthenService {
 		return null;
 	}
 	
-	public void doWhenLoginSuccessful() {
-		EmailService emailService = new EmailService();
-		switch (Storage.currentShop.id) {
-		case 1: {
-			emailService.sendEmail();
-		}
-		case 2: {
-			System.out.println("You have logged in successfully.");
-		}
-		case 3: {
-			LogService logService = new LogService();
-			ArrayList<Log> logs = logService.addFileToLog();
-			Log log = logs.get(Storage.currentLogId++);
-			System.out.println("===================");
-			System.out.println(log.id + ". " + log.customer.id + " has logged in successfully in " + log.now);
-			System.out.println("===================");
-			log.id = Storage.currentLogId;
-		}
-		default: 
-			return;
+	public abstract void doWhenLoginSuccessful();
+	
+	public static AuthenService selectAuthenService() {
+		if (Storage.currentShop.id == 1) {
+			return new Shop1AuthenService();
+		} else if (Storage.currentShop.id == 2) {
+			return new Shop2AuthenService();
+		} else {
+			return new Shop3AuthenService();
 		}
 	}
+	
+
 	// logout
 }

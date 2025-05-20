@@ -7,12 +7,9 @@ import com.longg.common.Storage;
 import com.longg.dto.Cart;
 import com.longg.dto.CartItem;
 import com.longg.dto.Customer;
-import com.longg.dto.Log;
 import com.longg.dto.Product;
 import com.longg.dto.Shop;
 import com.longg.service.AuthenService;
-import com.longg.service.EmailService;
-import com.longg.service.LogService;
 import com.longg.service.ProductService;
 import com.longg.service.ShopService;
 import com.longg.service.ShoppingCartService;
@@ -24,22 +21,24 @@ public class Main {
 	static Customer customer;
 	static Scanner scan = new Scanner(System.in);
 	private static final int VIEW_CART_OPTION_ON_MENU = 0;
+	private static final int CHECK_OUT_OPTION_ON_MENU = 1;
 
-	private static ShoppingCartService cartService = new ShoppingCartService();
-	private static AuthenService authenService = new AuthenService();
+	private static ShoppingCartService cartService = null;
+	private static AuthenService authenService = null;
 
 	public static void main(String[] args) {
 		
 		selectedShop = selectShop();
 		Storage.currentShop = selectedShop;
-
+		
+		authenService = AuthenService.selectAuthenService();
+		cartService = ShoppingCartService.selectShoppingCartService();
+		
 		boolean isLoggedin;
 
 		do {
 			isLoggedin = doLogin();
 		} while (!isLoggedin);
-
-		
 		
 		do {
 			showMenu();
@@ -50,6 +49,10 @@ public class Main {
 
 			if (option == VIEW_CART_OPTION_ON_MENU) {
 				cartService.showCart(cart);
+			} else if (option == CHECK_OUT_OPTION_ON_MENU) {
+				Storage.currentCart = cart;
+				cartService.checkOut(cart);
+				return;
 			} else {
 				doAddProductToCart(option);
 			}
@@ -60,9 +63,10 @@ public class Main {
 		ProductService productService = new ProductService();
 		ArrayList<Product> products = productService.readProductFile();
 		System.out.println("0. View Cart");
+		System.out.println("1. Check out");
 		for (int i = 0; i < products.size(); i++) {
 			System.out.println(
-					(i + 1) + ". " + products.get(i).name + " : " + products.get(i).price);
+					(i + 2) + ". " + products.get(i).name + " : " + products.get(i).price);
 		}
 	}
 
@@ -90,7 +94,7 @@ public class Main {
 	private static void doAddProductToCart(int productIndex) {
 		ProductService productService = new ProductService();
 		ArrayList<Product> products = productService.readProductFile();
-		Product selectedProduct = products.get(productIndex - 1);
+		Product selectedProduct = products.get(productIndex - 2);
 
 		System.out.print("Enter quantity : ");
 		int quantity = Integer.parseInt(scan.nextLine());

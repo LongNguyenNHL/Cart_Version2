@@ -3,6 +3,7 @@ package com.longg.dto;
 public class CartItem extends Product {
 
 	public int quantity;
+	public double totalPrice;
 
 	public CartItem() {
 	}
