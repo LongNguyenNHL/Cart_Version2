@@ -35,6 +35,7 @@ public interface ShoppingCartService {
 	}
 
 	public default void showCart(Cart cart) {
+		System.out.println("-------------YOUR CART-------------");
 		if (cart.items.size() == 0) {
 			System.out.println("Your cart is empty");
 			return;
@@ -45,41 +46,44 @@ public interface ShoppingCartService {
 	}
 	
 	public default void checkOut (Cart cart) {
+		System.out.println("-------------CHECKOUT-------------");
 		cart.total  = 0;
 		double shippingFee = 0;
 		DecimalFormat fmt = new DecimalFormat("0.##");
 		if (cart.items.size() == 0) {
-			System.out.println("Your checkout is empty");
+			System.out.println("Nothing to checkout");
 			return;
 		}
 		for (int i = 0; i < cart.items.size(); i++) {
 			CartItem item = cart.items.get(i);
 			cart.total = cart.total + item.totalPrice;
-			shippingFee += + item.quantity * 0.3;
-//			System.out.println(item.name + " = " + item.price + ". quantity = " + item.quantity + ". total price = " + item.totalPrice);
+			shippingFee += + item.quantity * 0.5;
 			System.out.print(i + 1 + ". " + item.name
 			+ " - " + item.price + " AUD"
 			+ " - " + item.quantity
 			+ " - " + item.totalPrice + " AUD");
 			System.out.println();
-			System.out.println("SHIP: saving 3 - 5 days - " + fmt.format(shippingFee) + " Aud");
-			System.out.println();
 		}
+		
+		System.out.println("SHIP: saving 3 - 5 days - " + fmt.format(shippingFee) + " Aud");
+		System.out.println();
 		
 		double discount = 0;
 		
-//		discount = total * user.getRank().promotion / 100;
-//		
-//System.out.println("RANK " + user.rank + ": discount " + user.getRank().promotion + "% = " + fmt.format(discount) + " AUD");
-//
-//total = total + shippingFee - discount ;
-//
+		discount = cart.total * Storage.currentRank.promotion / 100;
+		
+		System.out.println("RANK " + Storage.currentRank.name + ": discount " + Storage.currentRank.promotion + "% = " + fmt.format(discount) + " AUD");
+
+		cart.total = cart.total + shippingFee - discount ;
+
 		System.out.println("TOTAL: " + fmt.format(cart.total) + " AUD");
+		System.out.println();
 		doWhenCheckOutSuccessful();
 	}
 	
 	public void doWhenCheckOutSuccessful();
 	
+	// Factory Design Button
 	public static ShoppingCartService selectShoppingCartService() {
 		if (Storage.currentShop.id == 1) {
 			return new Shop1ShoppingCartService();

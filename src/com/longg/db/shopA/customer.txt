@@ -1,3 +1,3 @@
-1,1,1@gmail.com
-2,2,2@gmail.com
-3,3,3@gmail.com
+1,1,1@gmail.com,silver
+2,2,2@gmail.com,gold
+3,3,3@gmail.com,diamond

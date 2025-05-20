@@ -1,3 +1,3 @@
-x,x,x@gmail.com
-y,y,y@gmail.com
-z,z,z@gmail.com
+x,x,x@gmail.com,basic
+y,y,y@gmail.com,premium
+z,z,z@gmail.com,vip

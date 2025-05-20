@@ -1,2 +1,3 @@
-a,a,a@gmail.com
-b,b,b@gmail.com
+a,a,a@gmail.com,classic
+b,b,b@gmail.com,gold
+c,c,c@gmail.com,platinum

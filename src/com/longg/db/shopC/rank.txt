@@ -1,0 +1,4 @@
+name,promotion
+basic,5
+premium,10
+vip,15

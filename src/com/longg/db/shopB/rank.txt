@@ -1,0 +1,4 @@
+name,promotion
+classic,5
+gold,15
+platinum,25

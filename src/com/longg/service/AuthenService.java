@@ -25,6 +25,7 @@ public abstract class AuthenService {
 	
 	public abstract void doWhenLoginSuccessful();
 	
+	// Factory Design Button
 	public static AuthenService selectAuthenService() {
 		if (Storage.currentShop.id == 1) {
 			return new Shop1AuthenService();
@@ -35,6 +36,5 @@ public abstract class AuthenService {
 		}
 	}
 	
-
 	// logout
 }
