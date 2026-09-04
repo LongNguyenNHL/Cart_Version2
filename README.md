@@ -1,3 +1,5 @@
+# Shopping Cart System (Java)
+
 A console-based, multi-store shopping cart application written in Java, applying object-oriented design with a clear DTO / Service layer separation.
 
 ## Features
@@ -25,4 +27,3 @@ Java — OOP design (DTO/Service layers), file-based data storage
 - Structuring a Java application into DTO and Service layers rather than one large class
 - Designing multiple, independently-managed "stores" using shared service interfaces/patterns
 - Reading and writing structured data from `.txt` files
- file and select store in Database.java
